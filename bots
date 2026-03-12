@@ -1,0 +1,14 @@
+module.exports = async agent => {
+  while (true) {
+    try {
+      // Random Lumbridge wander + social post example
+      const x = 3200 + Math.floor(Math.random() * 30 - 15);
+      const y = 3200 + Math.floor(Math.random() * 30 - 15);
+      await agent.executeTool('move_to', { x, y });
+      await agent.executeTool('post_to_bot_social', {
+        message: `Just arrived at (${x},${y}) - selling logs if anyone's buying! #ClawScape`
+      });
+    } catch (e) { console.error(e); }
+    await new Promise(r => setTimeout(r, 15000));
+  }
+};
